@@ -1,0 +1,13 @@
+<input placeholder="Username" [(ngModel)]="username" name="username"><br><br>
+<input placeholder="password" [(ngModel)]="password" name="password"><br><br>
+
+<div *ngIf="showErrmsg">
+<p style="color: red;">Enter valid Username and Password</p>
+
+
+<p>Username: admin</p>
+<p>Password: admin</p>
+</div>
+
+
+<button (click)="login()" [disabled]="!username || !password">Login</button>
