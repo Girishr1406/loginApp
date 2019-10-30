@@ -1,18 +1,18 @@
 <div class="container">
     <button class="btn btn-primary" (click)="addNewEmployeeBtn()">Add Employee</button>
     <br><br>
-    <div class="jumbotron" *ngIf="newEmployeeClicked">
-        <form>
-            <div class="form-group">
+    <div  *ngIf="newEmployeeClicked">
+        <form class="row">
+            <div class="form-group col-md-6">
                 <label for="firstName">Name</label>
-                <input type="text" id="firstName" class="form-control">
+                <input type="text" id="firstName" [(ngModel)]="model.name" class="form-control" name="name">
             </div>
-            <div class="form-group">
+            <div class="form-group col-md-6">
                 <label for="position">Position</label>
-                <input type="text" id="position" class="form-control">
+                <input type="text" id="position"[(ngModel)]="model.position"  class="form-control" name="position">
             </div>
-            <div class="form-group">
-                <button class="btn btn-primary">Add</button>
+            <div class="form-group col-md-4">
+                <button type="submit" class="btn btn-primary" (click)="addEmployee(model.name, model.position)">SAVE</button>
             </div>
         </form>
     </div>
@@ -24,20 +24,17 @@
             </tr>
         </thead>
         <tbody>
-            <tr *ngFor="let emp of employees; let i =index">
-                <td>{{emp.name}}</td>
-                <td *ngIf="editClick"><input type="text"></td>
-                <td>{{emp.position}}</td>
-                <td *ngIf="editClick"><input type="text"></td>
+            <tr *ngFor="let emp of employees; let i =index;">
+                <td *ngIf="i !== editRowIndex">{{emp.name}}</td>
+                <td *ngIf="i === editRowIndex"><input type="text" id="firstName" [(ngModel)]="model.name" class="form-control" name="name"></td>
+                <td *ngIf="i !== editRowIndex">{{emp.position}}</td>
+                <td *ngIf="i === editRowIndex"><input type="text" id="position"[(ngModel)]="model.position"  class="form-control" name="position"></td>
                 <th>
-                    <a href="">
-                    <span class="glyphicon glyphicon-pencil" (click)="edit()"></span>
-                </a>
+                <button class="btn btn-link" (click)="edit(emp,i)" *ngIf="i !== editRowIndex">Edit</button>
+                <button class="btn btn-link" (click)="update(model.name, model.position, i)" *ngIf="i === editRowIndex">Update</button>
                 </th>
                 <th>
-                    <a href="">
-                    <span class="glyphicon glyphicon-remove" (click)="delete(i)"></span>
-                </a>
+                    <button class="btn btn-link" *ngIf="i !== editRowIndex" (click)="delete(i)">Delete</button>
                 </th>
             </tr>
         </tbody>

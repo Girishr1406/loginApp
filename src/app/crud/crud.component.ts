@@ -11,6 +11,9 @@ export class CrudComponent implements OnInit {
   constructor(private router:Router) { }
   newEmployeeClicked = false;
   editClick = false;
+  editid : any;
+  editRowIndex: any;
+  model: any = {};
   employees = [
     { name: 'Kevin', position: 'Front-End Dev' },
     { name: 'Michael', position: 'Recruiter Manager' },
@@ -20,13 +23,32 @@ export class CrudComponent implements OnInit {
   ngOnInit() {
   }
   addNewEmployeeBtn() {
-    this.newEmployeeClicked = !this.newEmployeeClicked
+    this.newEmployeeClicked = true;
+    this.model = {};
   }
-  edit(i){
-    this.router.navigate(["crud"]);
+  addEmployee(name, position) {  
+    
+    this.model = {
+      name: name,
+      position: position
+    }
+    this.employees.push(this.model);  
+    this.model = {};
+    this.newEmployeeClicked = false;
   }
-  delete(i){
-    this.employees.splice(i);
-    console.log(i);
+  delete(index) {
+    this.employees.splice(index,1);
+    this.model = {};
   }
+  edit(emp,index) {
+    this.editRowIndex = index;
+    this.model.name = emp.name;
+    this.model.position = emp.position;
+   }
+   update(name,position,index) {
+    this.employees[index].name = name;
+    this.employees[index].position = position;
+    this.editRowIndex = -1;
+   }
+
 }
