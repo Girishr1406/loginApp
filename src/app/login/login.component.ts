@@ -17,7 +17,7 @@ showErrmsg : any = false;
 
   login = () => {
     if(this.username == 'admin' && this.password == 'admin'){
-      this.router.navigate(["user"]);
+      this.router.navigate(["crud"]);
      }else {
       this.showErrmsg = true;
      }

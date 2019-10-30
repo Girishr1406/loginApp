@@ -14,7 +14,7 @@ export class AppComponent {
       if (event instanceof NavigationStart) {
         if (event['url'] == '/login') {
           this.showLogin = false;
-        } else if (event['url'] == '/user') {
+        } else if (event['url'] == '/crud') {
           this.showLogout = true;
         } else {
           this.showLogin = true;
